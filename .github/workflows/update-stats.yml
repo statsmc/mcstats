@@ -1,0 +1,53 @@
+name: Update Minecraft Stats (con contraseña)
+
+on:
+  # Ejecutar manualmente
+  workflow_dispatch:
+  
+  # Ejecutar automáticamente cada 6 horas
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Ejecutar en push a main (opcional)
+  push:
+    branches: [ main ]
+    paths:
+      - 'generate_stats_with_password.py'
+      - 'template.html'
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install paramiko
+        
+    - name: 📊 Generate stats
+      env:
+        MINECRAFT_SSH_HOST: ${{ secrets.MINECRAFT_SSH_HOST }}
+        MINECRAFT_SSH_PORT: ${{ secrets.MINECRAFT_SSH_PORT }}
+        MINECRAFT_SSH_USER: ${{ secrets.MINECRAFT_SSH_USER }}
+        MINECRAFT_SSH_PASSWORD: ${{ secrets.MINECRAFT_SSH_PASSWORD }}
+        MINECRAFT_WORLD_PATH: ${{ secrets.MINECRAFT_WORLD_PATH }}
+      run: |
+        python generate_stats_with_password.py
+        
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        publish_branch: gh-pages
+        keep_files: false
+        force_orphan: true
