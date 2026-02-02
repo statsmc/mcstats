@@ -1,4 +1,4 @@
-name: Update Minecraft Stats (con contraseña)
+name: Update Minecraft Stats
 
 on:
   # Ejecutar manualmente
@@ -15,6 +15,12 @@ on:
       - 'generate_stats_with_password.py'
       - 'template.html'
 
+# ⭐ IMPORTANTE: Dar permisos al workflow
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   update-stats:
     runs-on: ubuntu-latest
@@ -22,6 +28,9 @@ jobs:
     steps:
     - name: 📥 Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: 🐍 Set up Python
       uses: actions/setup-python@v4
@@ -51,3 +60,5 @@ jobs:
         publish_branch: gh-pages
         keep_files: false
         force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
