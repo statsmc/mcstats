@@ -1,25 +1,22 @@
 name: Update Minecraft Stats
 
 on:
-  # Ejecutar manualmente
   workflow_dispatch:
-  
-  # Ejecutar automáticamente cada 6 horas
   schedule:
     - cron: '0 */6 * * *'
-  
-  # Ejecutar en push a main (opcional)
   push:
     branches: [ main ]
     paths:
       - 'generate_stats_with_password.py'
       - 'template.html'
 
-# ⭐ IMPORTANTE: Dar permisos al workflow
+# Evitar múltiples deployments simultáneos
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   update-stats:
@@ -30,7 +27,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: 🐍 Set up Python
       uses: actions/setup-python@v4
