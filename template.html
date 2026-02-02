@@ -1,0 +1,3209 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft Stats - Dashboard Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-tertiary: #1a1a26;
+    --bg-elevated: #22222e;
+    --bg-hover: #2a2a38;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b8b8c8;
+    --text-tertiary: #7a7a8e;
+    
+    --accent-primary: #6366f1;
+    --accent-secondary: #8b5cf6;
+    --accent-tertiary: #a78bfa;
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #7c7ff5 0%, #9d6efa 100%);
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+    
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-medium: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    
+    --glass-bg: rgba(26, 26, 38, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 40px var(--accent-glow);
+    
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   SISTEMA DE ANIMACIONES ÉPICAS 🚀
+   ============================================ */
+
+/* ===== ANIMACIONES DE ENTRADA ===== */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInRotate {
+    from {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== ANIMACIONES DE ROTACIÓN Y GIRO ===== */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinSlow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wobble {
+    0%, 100% {
+        transform: translateX(0%);
+    }
+    15% {
+        transform: translateX(-25px) rotate(-5deg);
+    }
+    30% {
+        transform: translateX(20px) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-15px) rotate(-3deg);
+    }
+    60% {
+        transform: translateX(10px) rotate(2deg);
+    }
+    75% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+}
+
+@keyframes swing {
+    20% {
+        transform: rotate(15deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    60% {
+        transform: rotate(5deg);
+    }
+    80% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* ===== ANIMACIONES DE PULSO Y LATIDO ===== */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.1);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.1);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--accent-primary), 0 0 10px var(--accent-primary);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--accent-primary), 0 0 30px var(--accent-primary), 0 0 40px var(--accent-primary);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        filter: brightness(1) drop-shadow(0 0 5px var(--accent-primary));
+    }
+    50% {
+        filter: brightness(1.3) drop-shadow(0 0 20px var(--accent-primary));
+    }
+}
+
+/* ===== ANIMACIONES DE FLOTACIÓN ===== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+@keyframes floatX {
+    0%, 100% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+}
+
+@keyframes levitate {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-30px);
+    }
+}
+
+/* ===== ANIMACIONES DE BRILLO Y RESPLANDOR ===== */
+@keyframes shine {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px var(--accent-primary),
+            0 0 20px var(--accent-primary),
+            0 0 30px var(--accent-primary);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px var(--accent-primary),
+            0 0 30px var(--accent-primary),
+            0 0 40px var(--accent-primary),
+            0 0 50px var(--accent-primary),
+            0 0 60px var(--accent-primary);
+    }
+}
+
+@keyframes rainbowShift {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* ===== ANIMACIONES ESPECÍFICAS DEL HERO ===== */
+@keyframes heroGlow {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: translateX(-50%) scale(1) rotate(0deg);
+    }
+    33% { 
+        opacity: 0.6; 
+        transform: translateX(-50%) scale(1.15) rotate(3deg);
+    }
+    66% { 
+        opacity: 0.5; 
+        transform: translateX(-50%) scale(1.08) rotate(-3deg);
+    }
+}
+
+@keyframes titleShine {
+    0%, 100% {
+        filter: brightness(1) saturate(1);
+    }
+    50% {
+        filter: brightness(1.3) saturate(1.3);
+    }
+}
+
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes titleGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ===== ANIMACIONES DE MODAL ===== */
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to { 
+        opacity: 1;
+        backdrop-filter: blur(16px);
+    }
+}
+
+@keyframes modalSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+    60% {
+        transform: translateY(-15px) scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalZoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-5deg);
+    }
+    60% {
+        transform: scale(1.05) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* ===== ANIMACIONES DE TARJETAS ===== */
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9) rotateX(20deg);
+    }
+    60% {
+        transform: translateY(-10px) scale(1.03) rotateX(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+    }
+}
+
+@keyframes cardFlip {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+}
+
+@keyframes cardSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px) rotate(-10deg);
+    }
+    60% {
+        transform: translateX(10px) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* ===== ANIMACIONES DE ESTADÍSTICAS ===== */
+@keyframes statPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes statCounter {
+    from {
+        transform: scale(0.8) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes numberTick {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* ===== ANIMACIONES DE PROGRESO ===== */
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+    to {
+        width: var(--progress-width);
+    }
+}
+
+@keyframes loadingBar {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* ===== ANIMACIONES DE PARTÍCULAS ===== */
+@keyframes particleRise {
+    0% {
+        transform: translateY(0) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) translateX(100px) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== ANIMACIONES DE ONDAS ===== */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* ===== ANIMACIONES DE GRADIENTE ===== */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes borderFlow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
+}
+
+@keyframes colorCycle {
+    0%, 100% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    25% {
+        filter: hue-rotate(90deg) brightness(1.1);
+    }
+    50% {
+        filter: hue-rotate(180deg) brightness(1.2);
+    }
+    75% {
+        filter: hue-rotate(270deg) brightness(1.1);
+    }
+}
+
+/* ===== ANIMACIONES 3D ===== */
+@keyframes rotate3D {
+    0% {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg) rotateX(360deg);
+    }
+}
+
+@keyframes flip3D {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+}
+
+@keyframes cube3D {
+    0% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+    33% {
+        transform: perspective(1000px) rotateX(90deg) rotateY(0deg);
+    }
+    66% {
+        transform: perspective(1000px) rotateX(90deg) rotateY(90deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+}
+
+/* ===== ANIMACIONES DE SHAKE ===== */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes shakeY {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateY(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes jello {
+    0%, 100% {
+        transform: skewX(0deg) skewY(0deg);
+    }
+    30% {
+        transform: skewX(25deg) skewY(25deg);
+    }
+    40% {
+        transform: skewX(-15deg) skewY(-15deg);
+    }
+    50% {
+        transform: skewX(15deg) skewY(15deg);
+    }
+    65% {
+        transform: skewX(-5deg) skewY(-5deg);
+    }
+    75% {
+        transform: skewX(5deg) skewY(5deg);
+    }
+}
+
+/* ===== ANIMACIONES DE TEXTO ===== */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px rgba(99, 102, 241, 0.8),
+            0 0 30px rgba(99, 102, 241, 0.6),
+            0 0 40px rgba(99, 102, 241, 0.4);
+    }
+}
+
+/* ===== ANIMACIONES DE BORDER ===== */
+@keyframes borderSpin {
+    0% {
+        border-image-source: linear-gradient(0deg, var(--accent-primary), var(--accent-secondary));
+    }
+    100% {
+        border-image-source: linear-gradient(360deg, var(--accent-primary), var(--accent-secondary));
+    }
+}
+
+@keyframes dashedRotate {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ===== ANIMACIONES DE HOVER AVANZADAS ===== */
+@keyframes hoverPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes hoverGlow {
+    0% {
+        box-shadow: 0 0 5px var(--accent-primary);
+    }
+    100% {
+        box-shadow: 0 0 20px var(--accent-primary), 0 0 40px var(--accent-primary);
+    }
+}
+
+/* ===== ANIMACIONES DE LOADING ===== */
+@keyframes dots {
+    0%, 20% {
+        content: '.';
+    }
+    40% {
+        content: '..';
+    }
+    60%, 100% {
+        content: '...';
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ellipsis {
+    0% {
+        content: '.';
+    }
+    33% {
+        content: '..';
+    }
+    66% {
+        content: '...';
+    }
+}
+
+@keyframes badgeFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Hero Header */
+.hero {
+    position: relative;
+    background: var(--bg-secondary);
+    padding: 64px 24px 80px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0.04;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: 600px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 60%);
+    z-index: 0;
+    opacity: 0.5;
+    animation: heroGlow 12s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 0.6; 
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-title {
+    font-size: 62px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 16px;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #6366f1);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+    animation: 
+        gradientShift 8s ease infinite,
+        titleFloat 3s ease-in-out infinite,
+        neonGlow 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+    transform-style: preserve-3d;
+}
+
+.hero-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 400;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+.hero-timestamp {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+}
+
+/* ==================== BOTÓN DE ACTUALIZACIÓN ==================== */
+.update-button {
+    margin-top: 24px;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: 2px solid #10b981;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s backwards;
+}
+
+.update-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
+.update-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    background: linear-gradient(45deg, #10b981, #34d399, #10b981);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.update-button:hover {
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 
+        var(--shadow-lg),
+        0 0 40px rgba(16, 185, 129, 0.5),
+        0 0 60px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.update-button:hover::before {
+    left: 100%;
+}
+
+.update-button:hover::after {
+    opacity: 1;
+    animation: borderRotate 3s linear infinite;
+}
+
+.update-button:active {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.update-button i {
+    font-size: 20px;
+    animation: floatSlow 3s ease-in-out infinite;
+}
+
+.update-button:hover i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 
+            var(--shadow-lg),
+            0 0 40px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        box-shadow: 
+            var(--shadow-lg),
+            0 0 60px rgba(16, 185, 129, 0.7),
+            0 0 80px rgba(16, 185, 129, 0.4);
+    }
+}
+
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltip para el botón */
+.update-button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.update-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-elevated);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    border: 1px solid var(--border-medium);
+}
+
+.update-button:hover + .update-tooltip {
+    opacity: 1;
+}
+
+/* Server Stats Bar */
+.server-stats {
+    max-width: 1400px;
+    margin: -36px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    box-shadow: var(--shadow-lg), 0 8px 32px rgba(99, 102, 241, 0.1);
+    animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 16px 12px;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    animation: statPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.4s; }
+.stat-item:nth-child(2) { animation-delay: 0.5s; }
+.stat-item:nth-child(3) { animation-delay: 0.6s; }
+.stat-item:nth-child(4) { animation-delay: 0.7s; }
+.stat-item:nth-child(5) { animation-delay: 0.8s; }
+.stat-item:nth-child(6) { animation-delay: 0.9s; }
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stat-item:hover {
+    background: rgba(99, 102, 241, 0.08);
+    transform: translateY(-6px) scale(1.05);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.stat-item:hover::before {
+    opacity: 0.05;
+    animation: shimmer 2s linear infinite;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+/* Main Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* Search & Filters */
+.controls {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1s backwards;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 18px 56px;
+    font-size: 16px;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: var(--transition);
+    outline: none;
+    font-weight: 500;
+}
+
+.search-input:focus {
+    border-color: var(--accent-primary);
+    background: var(--bg-tertiary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 8px 24px rgba(99, 102, 241, 0.15);
+    transform: translateY(-2px);
+    animation: borderGlow 2s ease-in-out infinite;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    font-size: 18px;
+    pointer-events: none;
+    transition: var(--transition-fast);
+}
+
+.search-input:focus ~ .search-icon {
+    color: var(--accent-primary);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.clear-search {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-elevated);
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    display: none;
+    width: 32px;
+    height: 32px;
+}
+
+.clear-search:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+    transform: translateY(-50%) rotate(90deg) scale(1.1);
+}
+
+.clear-search:active {
+    transform: translateY(-50%) rotate(90deg) scale(0.95);
+}
+
+.clear-search.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Filter Tabs */
+.filter-tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 14px 28px;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.tab-btn i {
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-fast);
+}
+
+.tab-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.tab-btn:hover {
+    border-color: var(--border-medium);
+    background: var(--bg-tertiary);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.tab-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.tab-btn:hover i {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.tab-btn:active {
+    transform: translateY(-1px) scale(1);
+}
+
+.tab-btn.active {
+    background: var(--accent-gradient);
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-3px);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.tab-btn.active::before {
+    opacity: 1;
+}
+
+.tab-btn.active i {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 52px 0 24px;
+    padding: 0 4px;
+    animation: slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.section-title i {
+    font-size: 24px;
+    color: var(--accent-primary);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.section-count {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    padding: 6px 14px;
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+    transition: var(--transition-fast);
+}
+
+.section-count:hover {
+    transform: scale(1.1);
+    background: var(--bg-elevated);
+}
+
+/* Player Grid */
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.player-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    animation: cardAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+/* Animaciones escalonadas para las cards */
+.player-card:nth-child(1) { animation-delay: 0.05s; }
+.player-card:nth-child(2) { animation-delay: 0.1s; }
+.player-card:nth-child(3) { animation-delay: 0.15s; }
+.player-card:nth-child(4) { animation-delay: 0.2s; }
+.player-card:nth-child(5) { animation-delay: 0.25s; }
+.player-card:nth-child(6) { animation-delay: 0.3s; }
+.player-card:nth-child(7) { animation-delay: 0.35s; }
+.player-card:nth-child(8) { animation-delay: 0.4s; }
+.player-card:nth-child(9) { animation-delay: 0.45s; }
+.player-card:nth-child(10) { animation-delay: 0.5s; }
+.player-card:nth-child(n+11) { animation-delay: 0.5s; }
+
+.player-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.player-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.player-card:hover {
+    transform: translateY(-12px) scale(1.03) rotateX(2deg);
+    border-color: var(--border-medium);
+    box-shadow: 
+        var(--shadow-lg),
+        0 0 30px rgba(99, 102, 241, 0.3),
+        0 0 60px rgba(99, 102, 241, 0.1);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.player-card:hover::before {
+    opacity: 0.08;
+    animation: shimmer 1.5s linear infinite;
+}
+
+.player-card:hover::after {
+    opacity: 1;
+    animation: spin 20s linear infinite;
+}
+
+.player-card:active {
+    transform: translateY(-6px) scale(1.01);
+    transition: var(--transition-fast);
+}
+
+.player-card.rank-1 {
+    border-color: rgba(99, 102, 241, 0.25);
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.03) 0%, var(--bg-secondary) 100%);
+}
+
+.player-card.rank-1::before {
+    opacity: 0.03;
+}
+
+.player-card.rank-1:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+.player-card.rank-1:hover::before {
+    opacity: 0.07;
+}
+
+.player-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.player-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+}
+
+.player-main-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rank-badge {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-medium);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    animation: badgeFloat 3s ease-in-out infinite;
+}
+
+.rank-badge:hover {
+    transform: scale(1.08) rotate(-2deg);
+    animation: none;
+}
+
+.rank-badge.top {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+    border-color: rgba(99, 102, 241, 0.3);
+    color: var(--accent-tertiary);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    animation: badgeFloat 3s ease-in-out infinite, borderGlow 2s ease-in-out infinite;
+}
+
+.rank-badge.top:hover {
+    animation: pulse 0.6s ease-in-out infinite;
+}
+
+.player-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    image-rendering: pixelated;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--border-subtle);
+    flex-shrink: 0;
+    transition: var(--transition);
+    position: relative;
+}
+
+.player-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-md);
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+.player-card:hover .player-avatar {
+    transform: scale(1.15) rotate(5deg) translateY(-3px);
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(99, 102, 241, 0.5);
+    animation: floatSlow 3s ease-in-out infinite;
+    filter: brightness(1.1);
+}
+
+.player-card:hover .player-avatar::after {
+    opacity: 0.5;
+    animation: spinSlow 8s linear infinite;
+}
+
+.player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+}
+
+.player-time {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.player-time i {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.player-stats-mini {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.stat-mini {
+    text-align: center;
+    padding: 16px 10px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-mini::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stat-mini::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.stat-mini:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+    transform: translateY(-5px) scale(1.05);
+}
+
+.stat-mini:hover::before {
+    opacity: 1;
+    animation: shimmer 1.5s linear infinite;
+}
+
+.stat-mini:hover::after {
+    width: 150%;
+    height: 150%;
+}
+
+.stat-mini:active {
+    transform: translateY(-3px) scale(1.02);
+}
+
+.stat-mini-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-fast);
+}
+
+.stat-mini:hover .stat-mini-value {
+    transform: scale(1.1);
+    color: var(--accent-primary);
+}
+
+.stat-mini-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+}
+
+/* Profile Modal */
+.profile-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.profile-modal.active {
+    display: block;
+    animation: modalFadeIn 0.5s ease;
+}
+
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to { 
+        opacity: 1;
+        backdrop-filter: blur(16px);
+    }
+}
+
+.profile-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-2xl);
+    padding: 48px;
+    box-shadow: 
+        var(--shadow-xl),
+        0 0 60px rgba(99, 102, 241, 0.2);
+    animation: modalZoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9) rotateX(10deg);
+    }
+    60% {
+        transform: translateY(-10px) scale(1.02) rotateX(-2deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+    }
+}
+
+.profile-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: var(--transition);
+}
+
+.profile-close:hover {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+    transform: rotate(180deg) scale(1.2);
+    box-shadow: 
+        0 8px 24px rgba(239, 68, 68, 0.5),
+        0 0 40px rgba(239, 68, 68, 0.3);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.profile-hero {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--border-subtle);
+}
+
+.profile-avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: var(--radius-xl);
+    image-rendering: pixelated;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--border-medium);
+}
+
+.profile-meta h1 {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+}
+
+.profile-uuid {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+    background: var(--bg-tertiary);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+/* Profile Search */
+.profile-search {
+    margin-bottom: 32px;
+}
+
+.profile-search-input {
+    width: 100%;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 14px 48px;
+    font-size: 15px;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: var(--transition);
+    outline: none;
+}
+
+.profile-search-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.profile-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    font-size: 16px;
+}
+
+/* Stat Cards Large */
+.stat-cards-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card-large {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-elevated) 100%);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-large::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stat-card-large:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card-large:hover::before {
+    opacity: 1;
+}
+
+.stat-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    background: var(--accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 24px;
+    box-shadow: var(--shadow-glow);
+}
+
+.stat-card-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.03em;
+}
+
+.stat-card-label {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Totals Section */
+.totals-section {
+    margin-bottom: 40px;
+}
+
+.totals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.total-card {
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-tertiary) 100%);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: var(--transition);
+}
+
+.total-card:hover {
+    border-color: var(--accent-secondary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.total-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.total-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.total-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.total-card-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.total-card-unit {
+    font-size: 16px;
+    color: var(--text-tertiary);
+    font-weight: 700;
+}
+
+/* Achievement Cards */
+.achievement-card {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
+}
+
+.achievement-card:hover::before {
+    left: 100%;
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    animation: floatSlow 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover .achievement-icon {
+    animation: floatSlow 4s ease-in-out infinite, spin 2s ease-in-out 1;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+    transform: scale(1.2);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(0deg); }
+    75% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.achievement-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.achievement-description {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* Game Advancement Cards */
+.game-advancement-card {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-advancement-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-primary);
+    background: var(--bg-hover);
+}
+
+.game-advancement-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.game-advancement-card:hover::after {
+    transform: scaleX(1);
+}
+
+.advancement-category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.advancement-category-header:hover {
+    background: var(--bg-hover);
+}
+
+/* Category Sections */
+.category-section {
+    margin-bottom: 32px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border-subtle);
+}
+
+.category-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-glow);
+}
+
+.category-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.category-count {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-tertiary);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+}
+
+.stat-row {
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.stat-row:hover {
+    border-color: var(--border-medium);
+    background: var(--bg-elevated);
+    transform: translateX(4px);
+}
+
+.stat-row-label {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.stat-row-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.stat-unit {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 700;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 80px 32px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+}
+
+.empty-icon {
+    font-size: 64px;
+    color: var(--text-tertiary);
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 42px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .player-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-content {
+        padding: 32px 24px;
+    }
+    
+    .profile-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .stat-cards-large {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .totals-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+::selection {
+    background: var(--accent-primary);
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<!-- Canvas de partículas animadas de fondo -->
+<canvas id="particles-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.3;"></canvas>
+
+<div class="app">
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">⛏️ Minecraft Stats EPIC</h1>
+            <p class="hero-subtitle">🚀 Panel Ultra Premium de Estadísticas Avanzadas 🎮</p>
+            <p class="hero-timestamp">Actualizado: {UPDATE_TIME}</p>
+            <a href="https://github.com/{GITHUB_USER}/{GITHUB_REPO}/actions/workflows/update-stats.yml" target="_blank" class="update-button">
+                <i class="fas fa-sync-alt"></i>
+                <span>Actualizar Stats</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Server Stats -->
+    <div class="server-stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">{PLAYER_COUNT}</div>
+                <div class="stat-label">Jugadores</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{TOTAL_TIME}</div>
+                <div class="stat-label">Tiempo Total</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{TOTAL_BLOCKS}</div>
+                <div class="stat-label">Bloques Minados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{TOTAL_DISTANCE}</div>
+                <div class="stat-label">Kilómetros</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{TOTAL_KILLS}</div>
+                <div class="stat-label">Criaturas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{AVG_TIME}</div>
+                <div class="stat-label">Promedio/Jugador</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Search & Controls -->
+        <div class="controls">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Buscar jugadores por nombre...">
+                <button class="clear-search" id="clearSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-tab="all">
+                    <i class="fas fa-users"></i> Todos
+                </button>
+                <button class="tab-btn" data-tab="players">
+                    <i class="fas fa-user"></i> Jugadores
+                </button>
+                <button class="tab-btn" data-tab="bots">
+                    <i class="fas fa-robot"></i> Bots
+                </button>
+            </div>
+        </div>
+
+        <!-- Players Section -->
+        <div class="section-header">
+            <div class="section-title">
+                <i class="fas fa-trophy"></i>
+                <span>Jugadores</span>
+            </div>
+            <div class="section-count" id="playerCount">{len(real)}</div>
+        </div>
+        <div class="player-grid" id="playersGrid"></div>
+
+        <!-- Bots Section -->
+        <div class="section-header">
+            <div class="section-title">
+                <i class="fas fa-robot"></i>
+                <span>Bots Detectados</span>
+            </div>
+            <div class="section-count" id="botCount">{len(bots)}</div>
+        </div>
+        <div class="player-grid" id="botsGrid"></div>
+    </div>
+</div>
+
+<!-- Profile Modal -->
+<div class="profile-modal" id="profileModal">
+    <div class="profile-content">
+        <button class="profile-close" onclick="closeProfile()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="profileData"></div>
+    </div>
+</div>
+
+<script>
+const playersData = {PLAYERS_DATA};
+const botsData = ;
+let currentFilter = 'all';
+let searchQuery = '';
+let currentPlayerData = null;
+let profileSearchQuery = '';
+
+// Traducciones y categorías
+const STAT_TRANSLATIONS = {json.dumps(STAT_TRANSLATIONS)};
+
+const DISTANCE_STATS = [
+    "minecraft:walk_one_cm", "minecraft:sprint_one_cm", "minecraft:crouch_one_cm",
+    "minecraft:fly_one_cm", "minecraft:swim_one_cm", "minecraft:aviate_one_cm",
+    "minecraft:boat_one_cm", "minecraft:minecart_one_cm", "minecraft:horse_one_cm",
+    "minecraft:walk_on_water_one_cm", "minecraft:walk_under_water_one_cm",
+    "minecraft:fall_one_cm", "minecraft:climb_one_cm", "minecraft:pig_one_cm", "minecraft:strider_one_cm"
+];
+
+const DAMAGE_STATS = [
+    "minecraft:damage_dealt", "minecraft:damage_taken", "minecraft:damage_absorbed",
+    "minecraft:damage_blocked_by_shield", "minecraft:damage_resisted"
+];
+
+function formatValue(key, value) {
+    if (DISTANCE_STATS.includes(key)) {
+        const km = value / 100000;
+        return km >= 1 ? km.toFixed(2) : (value / 100).toFixed(0);
+    } else if (DAMAGE_STATS.includes(key)) {
+        return (value / 2).toFixed(1);
+    } else {
+        return value.toLocaleString('es-ES');
+    }
+}
+
+function getUnit(key) {
+    if (DISTANCE_STATS.includes(key)) return 'km';
+    if (DAMAGE_STATS.includes(key)) return '❤';
+    return '';
+}
+
+function getStatCategory(key) {
+    const movement = DISTANCE_STATS;
+    const combat = ["minecraft:mob_kills", "minecraft:player_kills", ...DAMAGE_STATS];
+    const interaction = [
+        "minecraft:interact_with_crafting_table", "minecraft:interact_with_furnace",
+        "minecraft:open_chest", "minecraft:open_enderchest", "minecraft:trade_with_villager",
+        "minecraft:talk_to_villager", "minecraft:animals_bred", "minecraft:fish_caught"
+    ];
+    
+    if (movement.includes(key)) return 'movement';
+    if (combat.includes(key)) return 'combat';
+    if (interaction.includes(key)) return 'interaction';
+    return 'other';
+}
+
+// Renderizar tarjetas
+function renderCards(data, containerId) {
+    const container = document.getElementById(containerId);
+    if (!data || data.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+                <div class="empty-text">No se encontraron jugadores</div>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = data.map((player, index) => {
+        const rankNum = index + 1;
+        const isTop3 = index < 3;
+        const trophy = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
+        const rankClass = index === 0 ? 'rank-1' : '';
+        const badgeClass = isTop3 ? 'top' : '';
+        
+        return `
+            <div class="player-card ${rankClass}" onclick="openProfile('${player.uuid}', ${containerId === 'botsGrid'})">
+                <div class="player-card-content">
+                    <div class="player-card-header">
+                        <div class="player-main-info">
+                            <img src="${player.skin}" alt="${player.name}" class="player-avatar">
+                            <div class="player-info">
+                                <div class="player-name">${player.name}</div>
+                                <div class="player-time">
+                                    <i class="fas fa-clock"></i> ${player.time_txt}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rank-badge ${badgeClass}">
+                            ${trophy ? `${trophy} ` : ''}#${rankNum}
+                        </div>
+                    </div>
+                    <div class="player-stats-mini">
+                        <div class="stat-mini">
+                            <div class="stat-mini-value">${player.blocks.toLocaleString('es-ES')}</div>
+                            <div class="stat-mini-label">Bloques</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-value">${player.kills}</div>
+                            <div class="stat-mini-label">Kills</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-value">${player.deaths}</div>
+                            <div class="stat-mini-label">Muertes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Filtrar datos
+function filterData() {
+    let filteredPlayers = playersData;
+    let filteredBots = botsData;
+    
+    if (searchQuery) {
+        filteredPlayers = playersData.filter(p => 
+            p.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        filteredBots = botsData.filter(p => 
+            p.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }
+    
+    if (currentFilter === 'players') {
+        renderCards(filteredPlayers, 'playersGrid');
+        document.getElementById('botsGrid').innerHTML = '';
+    } else if (currentFilter === 'bots') {
+        renderCards(filteredBots, 'botsGrid');
+        document.getElementById('playersGrid').innerHTML = '';
+    } else {
+        renderCards(filteredPlayers, 'playersGrid');
+        renderCards(filteredBots, 'botsGrid');
+    }
+    
+    document.getElementById('playerCount').textContent = filteredPlayers.length;
+    document.getElementById('botCount').textContent = filteredBots.length;
+}
+
+// Búsqueda
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+
+searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    clearSearch.classList.toggle('visible', searchQuery.length > 0);
+    filterData();
+});
+
+clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    searchQuery = '';
+    clearSearch.classList.remove('visible');
+    filterData();
+});
+
+// Filtros
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.tab;
+        filterData();
+    });
+});
+
+// Abrir perfil
+function openProfile(uuid, isBot) {
+    const player = isBot ? 
+        botsData.find(p => p.uuid === uuid) : 
+        playersData.find(p => p.uuid === uuid);
+    
+    if (!player) return;
+    
+    currentPlayerData = player;
+    renderProfile(player);
+    
+    document.getElementById('profileModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Diccionario de logros de Minecraft con iconos y descripciones
+const MINECRAFT_ADVANCEMENTS = {
+    // Story (Historia)
+    'minecraft:story/root': { name: 'Minecraft', icon: '🎮', desc: 'El corazón y la historia del juego', category: 'story' },
+    'minecraft:story/mine_stone': { name: 'La Edad de Piedra', icon: '⛏️', desc: 'Mina piedra con tu pico nuevo', category: 'story' },
+    'minecraft:story/upgrade_tools': { name: 'Mejorando', icon: '🔧', desc: 'Construye un pico mejor', category: 'story' },
+    'minecraft:story/smelt_iron': { name: 'Adquirir Hardware', icon: '⚙️', desc: 'Funde un lingote de hierro', category: 'story' },
+    'minecraft:story/obtain_armor': { name: '¡Cúbrete!', icon: '🛡️', desc: 'Protégete con una pieza de armadura', category: 'story' },
+    'minecraft:story/mine_diamond': { name: '¡DIAMANTES!', icon: '💎', desc: 'Consigue diamantes', category: 'story' },
+    'minecraft:story/enter_the_nether': { name: 'Necesitamos Ir Más Profundo', icon: '🔥', desc: 'Construye y entra al Nether', category: 'story' },
+    'minecraft:story/shiny_gear': { name: 'Cúbrete de Diamantes', icon: '💎', desc: 'Armadura de diamante', category: 'story' },
+    'minecraft:story/enchant_item': { name: 'Encantador', icon: '✨', desc: 'Encanta un objeto', category: 'story' },
+    'minecraft:story/enter_the_end': { name: 'El Fin?', icon: '🌌', desc: 'Entra al portal del End', category: 'story' },
+    
+    // Nether
+    'minecraft:nether/root': { name: 'Nether', icon: '🔥', desc: 'Lleva el verano contigo', category: 'nether' },
+    'minecraft:nether/return_to_sender': { name: 'Devuélvele el Golpe', icon: '💥', desc: 'Destruye un ghast con su bola de fuego', category: 'nether' },
+    'minecraft:nether/obtain_blaze_rod': { name: 'A las Llamas', icon: '🔥', desc: 'Consigue una vara de blaze', category: 'nether' },
+    'minecraft:nether/get_wither_skull': { name: 'Calavera Siniestra', icon: '💀', desc: 'Obtén calavera de wither', category: 'nether' },
+    'minecraft:nether/summon_wither': { name: 'Retenedor', icon: '💀', desc: 'Invoca al wither', category: 'nether' },
+    'minecraft:nether/brew_potion': { name: 'Alquimista Local', icon: '🧪', desc: 'Prepara una poción', category: 'nether' },
+    'minecraft:nether/create_beacon': { name: 'Trae el Faro', icon: '🔆', desc: 'Construye un faro', category: 'nether' },
+    'minecraft:nether/all_potions': { name: 'Gran Alquimista', icon: '🧪', desc: 'Todos los efectos de poción', category: 'nether' },
+    'minecraft:nether/create_full_beacon': { name: 'Faromanía', icon: '🔆', desc: 'Activa faro al máximo', category: 'nether' },
+    
+    // The End
+    'minecraft:end/root': { name: 'El Fin', icon: '🌌', desc: 'O el principio?', category: 'end' },
+    'minecraft:end/kill_dragon': { name: 'Libera el Fin', icon: '🐉', desc: 'Derrota al dragón', category: 'end' },
+    'minecraft:end/dragon_egg': { name: 'Próxima Generación', icon: '🥚', desc: 'Sostén el huevo de dragón', category: 'end' },
+    'minecraft:end/elytra': { name: 'El Cielo es el Límite', icon: '🦅', desc: 'Encuentra élytras', category: 'end' },
+    
+    // Adventure
+    'minecraft:adventure/root': { name: 'Aventura', icon: '⚔️', desc: 'Aventura y combate', category: 'adventure' },
+    'minecraft:adventure/kill_a_mob': { name: 'Cazador de Monstruos', icon: '🗡️', desc: 'Mata una criatura hostil', category: 'adventure' },
+    'minecraft:adventure/trade': { name: 'Buen Trato', icon: '💼', desc: 'Intercambia con aldeano', category: 'adventure' },
+    'minecraft:adventure/sleep_in_bed': { name: 'Dulces Sueños', icon: '🛏️', desc: 'Duerme en una cama', category: 'adventure' },
+    'minecraft:adventure/hero_of_the_village': { name: 'Héroe de la Aldea', icon: '🏆', desc: 'Defiende una aldea', category: 'adventure' },
+    'minecraft:adventure/kill_all_mobs': { name: 'Cazador Completo', icon: '⚔️', desc: 'Mata cada mob hostil', category: 'adventure' },
+    'minecraft:adventure/totem_of_undying': { name: 'Post Mortem', icon: '🗿', desc: 'Usa tótem de inmortalidad', category: 'adventure' },
+    'minecraft:adventure/adventuring_time': { name: 'Hora de Aventuras', icon: '🗺️', desc: 'Descubre todos los biomas', category: 'adventure' },
+    'minecraft:adventure/sniper_duel': { name: 'Francotirador', icon: '🎯', desc: 'Mata esqueleto a 50m', category: 'adventure' },
+    
+    // Husbandry
+    'minecraft:husbandry/root': { name: 'Agricultura', icon: '🌾', desc: 'Mundo lleno de amigos', category: 'husbandry' },
+    'minecraft:husbandry/breed_an_animal': { name: 'Apareamiento', icon: '💕', desc: 'Cría dos animales', category: 'husbandry' },
+    'minecraft:husbandry/tame_an_animal': { name: 'Mejor Amigo', icon: '🐕', desc: 'Domestica un animal', category: 'husbandry' },
+    'minecraft:husbandry/fishy_business': { name: 'Negocio Sospechoso', icon: '🎣', desc: 'Atrapa un pez', category: 'husbandry' },
+    'minecraft:husbandry/plant_seed': { name: 'Sembremos', icon: '🌱', desc: 'Planta una semilla', category: 'husbandry' },
+    'minecraft:husbandry/breed_all_animals': { name: 'Apareamiento Completo', icon: '💑', desc: 'Cría todos los animales', category: 'husbandry' },
+    'minecraft:husbandry/balanced_diet': { name: 'Dieta Equilibrada', icon: '🍎', desc: 'Come todo', category: 'husbandry' },
+};
+
+// Categorías de logros
+const ADVANCEMENT_CATEGORIES = {
+    story: { name: 'Historia', icon: '📖', color: '#10b981' },
+    nether: { name: 'Nether', icon: '🔥', color: '#ef4444' },
+    end: { name: 'El Fin', icon: '🌌', color: '#8b5cf6' },
+    adventure: { name: 'Aventura', icon: '⚔️', color: '#3b82f6' },
+    husbandry: { name: 'Agricultura', icon: '🌾', color: '#f59e0b' }
+};
+
+function renderProfile(player) {
+    // Calcular totales
+    const totalDistance = DISTANCE_STATS.reduce((sum, key) => sum + parseInt(player.extras[key] || 0), 0);
+    const totalDistanceKm = (totalDistance / 100000).toFixed(2);
+    
+    const totalDamageDealt = (parseInt(player.extras['minecraft:damage_dealt'] || 0) / 2).toFixed(1);
+    const totalDamageTaken = (parseInt(player.extras['minecraft:damage_taken'] || 0) / 2).toFixed(1);
+    const totalDamageBlocked = (parseInt(player.extras['minecraft:damage_blocked_by_shield'] || 0) / 2).toFixed(1);
+    
+    const totalInteractions = [
+        'minecraft:interact_with_crafting_table', 'minecraft:open_chest',
+        'minecraft:trade_with_villager', 'minecraft:interact_with_furnace'
+    ].reduce((sum, key) => sum + parseInt(player.extras[key] || 0), 0);
+    
+    // Organizar stats por categoría
+    const statsByCategory = {
+        movement: [],
+        combat: [],
+        interaction: [],
+        other: []
+    };
+    
+    Object.entries(player.extras).forEach(([key, value]) => {
+        if (parseInt(value) > 0) {
+            const category = getStatCategory(key);
+            const label = STAT_TRANSLATIONS[key] || key.replace('minecraft:', '').replace(/_/g, ' ');
+            statsByCategory[category].push({
+                key,
+                label,
+                value,
+                formattedValue: formatValue(key, value),
+                unit: getUnit(key)
+            });
+        }
+    });
+    
+    // Buscar en perfil
+    function filterStats(query) {
+        document.querySelectorAll('.category-section').forEach(section => {
+            const rows = section.querySelectorAll('.stat-row');
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const label = row.querySelector('.stat-row-label').textContent.toLowerCase();
+                const matches = !query || label.includes(query);
+                row.classList.toggle('hidden', !matches);
+                if (matches) visibleCount++;
+            });
+            
+            section.classList.toggle('hidden', visibleCount === 0);
+            const countSpan = section.querySelector('.category-count');
+            if (countSpan) countSpan.textContent = visibleCount;
+        });
+    }
+    
+    const searchHtml = `
+        <div class="profile-search" style="position: relative;">
+            <i class="fas fa-search profile-search-icon"></i>
+            <input 
+                type="text" 
+                class="profile-search-input" 
+                id="profileSearchInput"
+                placeholder="Buscar estadísticas..."
+            >
+        </div>
+    `;
+    
+    // Generar HTML de categorías
+    const categories = [
+        { key: 'movement', title: 'Movimiento', icon: 'person-running', color: 'info' },
+        { key: 'combat', title: 'Combate', icon: 'hand-fist', color: 'error' },
+        { key: 'interaction', title: 'Interacciones', icon: 'hand-pointer', color: 'warning' },
+        { key: 'other', title: 'Otras Estadísticas', icon: 'ellipsis', color: 'secondary' }
+    ];
+    
+    let categoriesHtml = '';
+    categories.forEach(cat => {
+        const stats = statsByCategory[cat.key];
+        if (stats.length === 0) return;
+        
+        const statsHtml = stats.map(stat => `
+            <div class="stat-row">
+                <span class="stat-row-label">${stat.label}</span>
+                <span class="stat-row-value">
+                    ${stat.formattedValue}
+                    ${stat.unit ? `<span class="stat-unit">${stat.unit}</span>` : ''}
+                </span>
+            </div>
+        `).join('');
+        
+        categoriesHtml += `
+            <div class="category-section">
+                <div class="category-header">
+                    <div class="category-header-left">
+                        <div class="category-icon"><i class="fas fa-${cat.icon}"></i></div>
+                        <h3 class="category-title">${cat.title}</h3>
+                    </div>
+                    <div class="category-count">${stats.length}</div>
+                </div>
+                <div class="category-grid">${statsHtml}</div>
+            </div>
+        `;
+    });
+    
+    // Calcular estadísticas avanzadas
+    const hoursPlayed = player.ticks / 72000;
+    const blocksPerHour = hoursPlayed > 0 ? (player.blocks / hoursPlayed).toFixed(0) : 0;
+    const killsPerHour = hoursPlayed > 0 ? (player.kills / hoursPlayed).toFixed(1) : 0;
+    const kd_ratio = player.deaths > 0 ? (player.kills / player.deaths).toFixed(2) : player.kills;
+    const survivalTime = parseInt(player.extras['minecraft:time_since_death'] || 0);
+    const survivalTimeText = survivalTime > 0 ? `${Math.floor(survivalTime/72000)}h ${Math.floor((survivalTime%72000)/1200)}m` : 'N/A';
+    
+    // Sistema de logros mejorado
+    const achievements = [];
+    
+    // Logros de tiempo
+    if (player.ticks > 3600000) achievements.push({ icon: '👑', title: 'Leyenda del Servidor', desc: 'Más de 50 horas jugadas', color: '#FFD700' });
+    else if (player.ticks > 720000) achievements.push({ icon: '🏆', title: 'Veterano Dedicado', desc: 'Más de 10 horas jugadas', color: '#C0C0C0' });
+    else if (player.ticks > 360000) achievements.push({ icon: '⭐', title: 'Jugador Activo', desc: 'Más de 5 horas jugadas', color: '#CD7F32' });
+    
+    // Logros de minería
+    if (player.blocks > 100000) achievements.push({ icon: '💎', title: 'Minero Legendario', desc: 'Más de 100,000 bloques minados', color: '#00CED1' });
+    else if (player.blocks > 50000) achievements.push({ icon: '⛏️', title: 'Maestro Minero', desc: 'Más de 50,000 bloques minados', color: '#4169E1' });
+    else if (player.blocks > 10000) achievements.push({ icon: '🪨', title: 'Minero Profesional', desc: 'Más de 10,000 bloques minados', color: '#708090' });
+    
+    // Logros de combate
+    if (player.kills > 5000) achievements.push({ icon: '⚔️', title: 'Guerrero Implacable', desc: 'Más de 5,000 criaturas eliminadas', color: '#DC143C' });
+    else if (player.kills > 1000) achievements.push({ icon: '🗡️', title: 'Cazador Experto', desc: 'Más de 1,000 criaturas eliminadas', color: '#FF6347' });
+    else if (player.kills > 500) achievements.push({ icon: '🏹', title: 'Cazador Hábil', desc: 'Más de 500 criaturas eliminadas', color: '#FF8C00' });
+    
+    // Logros de exploración
+    if (totalDistanceKm > 1000) achievements.push({ icon: '🚀', title: 'Explorador Épico', desc: 'Más de 1,000 km recorridos', color: '#9370DB' });
+    else if (totalDistanceKm > 500) achievements.push({ icon: '🗺️', title: 'Gran Explorador', desc: 'Más de 500 km recorridos', color: '#BA55D3' });
+    else if (totalDistanceKm > 100) achievements.push({ icon: '🧭', title: 'Aventurero', desc: 'Más de 100 km recorridos', color: '#DDA0DD' });
+    
+    // Logros especiales
+    const elytraDistance = parseInt(player.extras['minecraft:aviate_one_cm'] || 0) / 100000;
+    if (elytraDistance > 500) achievements.push({ icon: '🦅', title: 'As del Cielo', desc: 'Más de 500 km con Elytra', color: '#87CEEB' });
+    
+    if (kd_ratio > 10) achievements.push({ icon: '🛡️', title: 'Superviviente Nato', desc: 'K/D superior a 10', color: '#32CD32' });
+    
+    const trades = parseInt(player.extras['minecraft:trade_with_villager'] || 0);
+    if (trades > 1000) achievements.push({ icon: '💰', title: 'Magnate Comercial', desc: 'Más de 1,000 intercambios', color: '#FFD700' });
+    
+    const fishCaught = parseInt(player.extras['minecraft:fish_caught'] || 0);
+    if (fishCaught > 500) achievements.push({ icon: '🎣', title: 'Pescador Maestro', desc: 'Más de 500 peces pescados', color: '#4682B4' });
+    
+    const achievementsHtml = achievements.length > 0 ? `
+        <div class="achievements-section" style="margin: 2rem 0;">
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fas fa-trophy"></i>
+                    <span>Logros Destacados</span>
+                </div>
+            </div>
+            <div class="achievements-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+                ${achievements.map(ach => `
+                    <div class="achievement-card" style="background: var(--bg-elevated); border: 2px solid var(--border-medium); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; transition: var(--transition); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: ${ach.color};"></div>
+                        <div class="achievement-icon" style="font-size: 2.5rem; margin-bottom: 0.75rem;">${ach.icon}</div>
+                        <div class="achievement-title" style="font-weight: 700; color: ${ach.color}; margin-bottom: 0.5rem; font-size: 1rem;">${ach.title}</div>
+                        <div class="achievement-description" style="font-size: 0.85rem; color: var(--text-tertiary);">${ach.desc}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+    
+    // Procesar logros del juego de Minecraft
+    const gameAdvancements = player.advancements || {};
+    const advancementsByCategory = { story: [], nether: [], end: [], adventure: [], husbandry: [] };
+    let totalAdvancements = 0;
+    
+    Object.keys(gameAdvancements).forEach(advKey => {
+        if (MINECRAFT_ADVANCEMENTS[advKey]) {
+            const adv = MINECRAFT_ADVANCEMENTS[advKey];
+            const advData = gameAdvancements[advKey];
+            const completedDate = advData.criteria ? Object.values(advData.criteria)[0] : null;
+            
+            advancementsByCategory[adv.category].push({
+                ...adv,
+                key: advKey,
+                completedDate: completedDate
+            });
+            totalAdvancements++;
+        }
+    });
+    
+    // HTML de logros del juego
+    let gameAdvancementsHtml = '';
+    if (totalAdvancements > 0) {
+        const categories = Object.entries(advancementsByCategory).filter(([_, advs]) => advs.length > 0);
+        
+        gameAdvancementsHtml = `
+            <div class="game-advancements-section" style="margin: 2rem 0;">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-medal"></i>
+                        <span>Logros de Minecraft (${totalAdvancements})</span>
+                    </div>
+                </div>
+                
+                ${categories.map(([catKey, advs]) => {
+                    const cat = ADVANCEMENT_CATEGORIES[catKey];
+                    return `
+                        <div class="advancement-category" style="margin-bottom: 2rem;">
+                            <div class="advancement-category-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md); border-left: 4px solid ${cat.color};">
+                                <span style="font-size: 1.5rem;">${cat.icon}</span>
+                                <h3 style="font-size: 1.2rem; font-weight: 700; color: ${cat.color};">${cat.name}</h3>
+                                <span style="margin-left: auto; background: var(--bg-elevated); padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 700; color: ${cat.color};">${advs.length}</span>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.75rem;">
+                                ${advs.map(adv => `
+                                    <div class="game-advancement-card" style="background: var(--bg-elevated); border: 2px solid var(--border-medium); border-radius: var(--radius-md); padding: 1rem; transition: var(--transition); cursor: pointer; position: relative; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; right: 0; width: 3rem; height: 3rem; background: linear-gradient(135deg, transparent 50%, ${cat.color}40 50%);"></div>
+                                        <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                            <span style="font-size: 2rem; flex-shrink: 0;">${adv.icon}</span>
+                                            <div style="flex: 1; min-width: 0;">
+                                                <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; font-size: 0.95rem;">${adv.name}</div>
+                                                <div style="font-size: 0.8rem; color: var(--text-tertiary); line-height: 1.4;">${adv.desc}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    }
+
+    document.getElementById('profileData').innerHTML = `
+        <div class="profile-hero">
+            <img src="${player.skin.replace('/80', '/128')}" alt="${player.name}" class="profile-avatar">
+            <div class="profile-meta">
+                <h1>${player.name}</h1>
+                <p class="profile-uuid">${player.uuid}</p>
+            </div>
+        </div>
+        
+        <div class="stat-cards-large">
+            <div class="stat-card-large">
+                <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-card-value">${player.time_txt}</div>
+                <div class="stat-card-label">Tiempo Jugado</div>
+            </div>
+            <div class="stat-card-large">
+                <div class="stat-card-icon"><i class="fas fa-cubes"></i></div>
+                <div class="stat-card-value">${player.blocks.toLocaleString('es-ES')}</div>
+                <div class="stat-card-label">Bloques Minados</div>
+            </div>
+            <div class="stat-card-large">
+                <div class="stat-card-icon"><i class="fas fa-skull"></i></div>
+                <div class="stat-card-value">${player.kills}</div>
+                <div class="stat-card-label">Criaturas Eliminadas</div>
+            </div>
+            <div class="stat-card-large">
+                <div class="stat-card-icon"><i class="fas fa-heart-crack"></i></div>
+                <div class="stat-card-value">${player.deaths}</div>
+                <div class="stat-card-label">Muertes</div>
+            </div>
+        </div>
+        
+        <div class="totals-section">
+            <div class="section-header" style="margin-top: 0;">
+                <div class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    <span>Totales Calculados</span>
+                </div>
+            </div>
+            <div class="totals-grid">
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-route"></i></div>
+                        <div class="total-card-title">Distancia Total Recorrida</div>
+                    </div>
+                    <div class="total-card-value">${totalDistanceKm} <span class="total-card-unit">km</span></div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-crosshairs"></i></div>
+                        <div class="total-card-title">Daño Total Infligido</div>
+                    </div>
+                    <div class="total-card-value">${totalDamageDealt} <span class="total-card-unit">❤</span></div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-shield-halved"></i></div>
+                        <div class="total-card-title">Daño Total Recibido</div>
+                    </div>
+                    <div class="total-card-value">${totalDamageTaken} <span class="total-card-unit">❤</span></div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-wrench"></i></div>
+                        <div class="total-card-title">Total Interacciones</div>
+                    </div>
+                    <div class="total-card-value">${totalInteractions.toLocaleString('es-ES')}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="totals-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Estadísticas Avanzadas</span>
+                </div>
+            </div>
+            <div class="totals-grid">
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-gauge-high"></i></div>
+                        <div class="total-card-title">Eficiencia Minera</div>
+                    </div>
+                    <div class="total-card-value">${blocksPerHour} <span class="total-card-unit">bloques/h</span></div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-crosshairs"></i></div>
+                        <div class="total-card-title">Eficiencia Combate</div>
+                    </div>
+                    <div class="total-card-value">${killsPerHour} <span class="total-card-unit">kills/h</span></div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-heart-pulse"></i></div>
+                        <div class="total-card-title">Ratio K/D</div>
+                    </div>
+                    <div class="total-card-value">${kd_ratio}</div>
+                </div>
+                <div class="total-card">
+                    <div class="total-card-header">
+                        <div class="total-card-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="total-card-title">Tiempo sin Morir</div>
+                    </div>
+                    <div class="total-card-value">${survivalTimeText}</div>
+                </div>
+            </div>
+        </div>
+        
+        ${achievementsHtml}
+        
+        ${gameAdvancementsHtml}
+        
+        ${searchHtml}
+        ${categoriesHtml}
+    `;
+    
+    // Event listener para búsqueda en perfil
+    setTimeout(() => {
+        const profileSearchInput = document.getElementById('profileSearchInput');
+        if (profileSearchInput) {
+            profileSearchInput.addEventListener('input', (e) => {
+                filterStats(e.target.value.toLowerCase());
+            });
+        }
+    }, 100);
+}
+
+function closeProfile() {
+    document.getElementById('profileModal').classList.remove('active');
+    document.body.style.overflow = '';
+    currentPlayerData = null;
+    profileSearchQuery = '';
+}
+
+// Cerrar modal con ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeProfile();
+});
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('profileModal').addEventListener('click', (e) => {
+    if (e.target.id === 'profileModal') closeProfile();
+});
+
+// ==================== ANIMACIÓN DE PARTÍCULAS ====================
+const canvas = document.getElementById('particles-bg');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.2;
+        this.color = ['#6366f1', '#8b5cf6', '#a78bfa', '#10b981', '#3b82f6'][Math.floor(Math.random() * 5)];
+    }
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        // Rebote en bordes
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        
+        // Mantener dentro del canvas
+        this.x = Math.max(0, Math.min(canvas.width, this.x));
+        this.y = Math.max(0, Math.min(canvas.height, this.y));
+    }
+    
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+    }
+}
+
+const particles = [];
+const particleCount = 50;
+
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+function connectParticles() {
+    const maxDistance = 150;
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < maxDistance) {
+                ctx.strokeStyle = '#6366f1';
+                ctx.globalAlpha = (1 - distance / maxDistance) * 0.2;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    
+    connectParticles();
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+// Inicializar
+filterData();
+</script>
+
+</body>
+</html>
