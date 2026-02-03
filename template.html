@@ -73,324 +73,36 @@ body {
 }
 
 /* ============================================
-   SISTEMA DE ANIMACIONES ÉPICAS 🚀
+   SISTEMA DE ANIMACIONES PREMIUM
    ============================================ */
 
-/* ===== ANIMACIONES DE ENTRADA ===== */
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
-    }
-    to { 
-        opacity: 1; 
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
 
 @keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeInRotate {
-    from {
-        opacity: 0;
-        transform: rotate(-10deg) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-    70% {
         transform: scale(0.9);
     }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
     to {
-        transform: translateY(0);
         opacity: 1;
-    }
-}
-
-@keyframes slideInDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* ===== ANIMACIONES DE ROTACIÓN Y GIRO ===== */
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes spinSlow {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes wobble {
-    0%, 100% {
-        transform: translateX(0%);
-    }
-    15% {
-        transform: translateX(-25px) rotate(-5deg);
-    }
-    30% {
-        transform: translateX(20px) rotate(3deg);
-    }
-    45% {
-        transform: translateX(-15px) rotate(-3deg);
-    }
-    60% {
-        transform: translateX(10px) rotate(2deg);
-    }
-    75% {
-        transform: translateX(-5px) rotate(-1deg);
-    }
-}
-
-@keyframes swing {
-    20% {
-        transform: rotate(15deg);
-    }
-    40% {
-        transform: rotate(-10deg);
-    }
-    60% {
-        transform: rotate(5deg);
-    }
-    80% {
-        transform: rotate(-5deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-/* ===== ANIMACIONES DE PULSO Y LATIDO ===== */
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-    }
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    10% {
-        transform: scale(1.1);
-    }
-    20% {
-        transform: scale(1);
-    }
-    30% {
-        transform: scale(1.1);
-    }
-    40% {
         transform: scale(1);
     }
 }
 
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 5px var(--accent-primary), 0 0 10px var(--accent-primary);
-    }
-    50% {
-        box-shadow: 0 0 20px var(--accent-primary), 0 0 30px var(--accent-primary), 0 0 40px var(--accent-primary);
-    }
-}
-
-@keyframes glowPulse {
-    0%, 100% {
-        filter: brightness(1) drop-shadow(0 0 5px var(--accent-primary));
-    }
-    50% {
-        filter: brightness(1.3) drop-shadow(0 0 20px var(--accent-primary));
-    }
-}
-
-/* ===== ANIMACIONES DE FLOTACIÓN ===== */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-@keyframes floatSlow {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-15px) rotate(2deg);
-    }
-}
-
-@keyframes floatX {
-    0%, 100% {
-        transform: translateX(0px);
-    }
-    50% {
-        transform: translateX(-10px);
-    }
-}
-
-@keyframes levitate {
-    0% {
-        transform: translateY(0px);
-    }
-    100% {
-        transform: translateY(-30px);
-    }
-}
-
-/* ===== ANIMACIONES DE BRILLO Y RESPLANDOR ===== */
-@keyframes shine {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
-    }
-}
-
-@keyframes neonGlow {
-    0%, 100% {
-        text-shadow: 
-            0 0 10px var(--accent-primary),
-            0 0 20px var(--accent-primary),
-            0 0 30px var(--accent-primary);
-    }
-    50% {
-        text-shadow: 
-            0 0 20px var(--accent-primary),
-            0 0 30px var(--accent-primary),
-            0 0 40px var(--accent-primary),
-            0 0 50px var(--accent-primary),
-            0 0 60px var(--accent-primary);
-    }
-}
-
-@keyframes rainbowShift {
-    0% {
-        filter: hue-rotate(0deg);
-    }
-    100% {
-        filter: hue-rotate(360deg);
-    }
-}
-
-/* ===== ANIMACIONES ESPECÍFICAS DEL HERO ===== */
 @keyframes heroGlow {
     0%, 100% { 
         opacity: 0.4; 
@@ -398,11 +110,11 @@ body {
     }
     33% { 
         opacity: 0.6; 
-        transform: translateX(-50%) scale(1.15) rotate(3deg);
+        transform: translateX(-50%) scale(1.08) rotate(2deg);
     }
     66% { 
         opacity: 0.5; 
-        transform: translateX(-50%) scale(1.08) rotate(-3deg);
+        transform: translateX(-50%) scale(1.05) rotate(-2deg);
     }
 }
 
@@ -411,7 +123,7 @@ body {
         filter: brightness(1) saturate(1);
     }
     50% {
-        filter: brightness(1.3) saturate(1.3);
+        filter: brightness(1.15) saturate(1.15);
     }
 }
 
@@ -420,23 +132,10 @@ body {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-5px);
     }
 }
 
-@keyframes titleGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* ===== ANIMACIONES DE MODAL ===== */
 @keyframes modalFadeIn {
     from { 
         opacity: 0;
@@ -451,10 +150,10 @@ body {
 @keyframes modalSlideUp {
     0% {
         opacity: 0;
-        transform: translateY(100px) scale(0.9);
+        transform: translateY(80px) scale(0.94);
     }
     60% {
-        transform: translateY(-15px) scale(1.03);
+        transform: translateY(-10px) scale(1.02);
     }
     100% {
         opacity: 1;
@@ -462,417 +161,31 @@ body {
     }
 }
 
-@keyframes modalZoomIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) rotate(-5deg);
-    }
-    60% {
-        transform: scale(1.05) rotate(2deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-    }
-}
-
-/* ===== ANIMACIONES DE TARJETAS ===== */
 @keyframes cardAppear {
     0% {
         opacity: 0;
-        transform: translateY(50px) scale(0.9) rotateX(20deg);
+        transform: translateY(40px) scale(0.92);
     }
     60% {
-        transform: translateY(-10px) scale(1.03) rotateX(-5deg);
+        transform: translateY(-8px) scale(1.02);
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg);
+        transform: translateY(0) scale(1);
     }
 }
 
-@keyframes cardFlip {
-    0% {
-        transform: perspective(1000px) rotateY(0deg);
-    }
-    100% {
-        transform: perspective(1000px) rotateY(180deg);
-    }
-}
-
-@keyframes cardSlideIn {
-    0% {
-        opacity: 0;
-        transform: translateX(-100px) rotate(-10deg);
-    }
-    60% {
-        transform: translateX(10px) rotate(2deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0) rotate(0deg);
-    }
-}
-
-/* ===== ANIMACIONES DE ESTADÍSTICAS ===== */
 @keyframes statPop {
     0% {
-        transform: scale(0.5);
+        transform: scale(0.8);
         opacity: 0;
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes statCounter {
-    from {
-        transform: scale(0.8) translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes numberTick {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-/* ===== ANIMACIONES DE PROGRESO ===== */
-@keyframes progressFill {
-    from {
-        width: 0%;
-    }
-    to {
-        width: var(--progress-width);
-    }
-}
-
-@keyframes loadingBar {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(400%);
-    }
-}
-
-@keyframes dotPulse {
-    0%, 100% {
-        opacity: 0.4;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-}
-
-/* ===== ANIMACIONES DE PARTÍCULAS ===== */
-@keyframes particleRise {
-    0% {
-        transform: translateY(0) translateX(0) scale(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-1000px) translateX(100px) scale(0);
-        opacity: 0;
-    }
-}
-
-@keyframes particleFloat {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-20px) translateX(10px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
-}
-
-@keyframes sparkle {
-    0%, 100% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* ===== ANIMACIONES DE ONDAS ===== */
-@keyframes ripple {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-@keyframes wave {
-    0% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-10px);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-/* ===== ANIMACIONES DE GRADIENTE ===== */
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes borderFlow {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 200% 0%;
-    }
-}
-
-@keyframes colorCycle {
-    0%, 100% {
-        filter: hue-rotate(0deg) brightness(1);
-    }
-    25% {
-        filter: hue-rotate(90deg) brightness(1.1);
-    }
-    50% {
-        filter: hue-rotate(180deg) brightness(1.2);
-    }
-    75% {
-        filter: hue-rotate(270deg) brightness(1.1);
-    }
-}
-
-/* ===== ANIMACIONES 3D ===== */
-@keyframes rotate3D {
-    0% {
-        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
-    }
-    100% {
-        transform: perspective(1000px) rotateY(360deg) rotateX(360deg);
-    }
-}
-
-@keyframes flip3D {
-    0% {
-        transform: perspective(1000px) rotateY(0deg);
-    }
-    100% {
-        transform: perspective(1000px) rotateY(180deg);
-    }
-}
-
-@keyframes cube3D {
-    0% {
-        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    }
-    33% {
-        transform: perspective(1000px) rotateX(90deg) rotateY(0deg);
-    }
-    66% {
-        transform: perspective(1000px) rotateX(90deg) rotateY(90deg);
-    }
-    100% {
-        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    }
-}
-
-/* ===== ANIMACIONES DE SHAKE ===== */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateX(-10px);
-    }
-    20%, 40%, 60%, 80% {
-        transform: translateX(10px);
-    }
-}
-
-@keyframes shakeY {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateY(-10px);
-    }
-    20%, 40%, 60%, 80% {
-        transform: translateY(10px);
-    }
-}
-
-@keyframes jello {
-    0%, 100% {
-        transform: skewX(0deg) skewY(0deg);
-    }
-    30% {
-        transform: skewX(25deg) skewY(25deg);
-    }
-    40% {
-        transform: skewX(-15deg) skewY(-15deg);
-    }
-    50% {
-        transform: skewX(15deg) skewY(15deg);
-    }
-    65% {
-        transform: skewX(-5deg) skewY(-5deg);
-    }
-    75% {
-        transform: skewX(5deg) skewY(5deg);
-    }
-}
-
-/* ===== ANIMACIONES DE TEXTO ===== */
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-}
-
-@keyframes textGlow {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
-    }
-    50% {
-        text-shadow: 
-            0 0 20px rgba(99, 102, 241, 0.8),
-            0 0 30px rgba(99, 102, 241, 0.6),
-            0 0 40px rgba(99, 102, 241, 0.4);
-    }
-}
-
-/* ===== ANIMACIONES DE BORDER ===== */
-@keyframes borderSpin {
-    0% {
-        border-image-source: linear-gradient(0deg, var(--accent-primary), var(--accent-secondary));
-    }
-    100% {
-        border-image-source: linear-gradient(360deg, var(--accent-primary), var(--accent-secondary));
-    }
-}
-
-@keyframes dashedRotate {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-/* ===== ANIMACIONES DE HOVER AVANZADAS ===== */
-@keyframes hoverPop {
-    0% {
-        transform: scale(1);
     }
     50% {
         transform: scale(1.1);
     }
     100% {
-        transform: scale(1.05);
-    }
-}
-
-@keyframes hoverGlow {
-    0% {
-        box-shadow: 0 0 5px var(--accent-primary);
-    }
-    100% {
-        box-shadow: 0 0 20px var(--accent-primary), 0 0 40px var(--accent-primary);
-    }
-}
-
-/* ===== ANIMACIONES DE LOADING ===== */
-@keyframes dots {
-    0%, 20% {
-        content: '.';
-    }
-    40% {
-        content: '..';
-    }
-    60%, 100% {
-        content: '...';
-    }
-}
-
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes ellipsis {
-    0% {
-        content: '.';
-    }
-    33% {
-        content: '..';
-    }
-    66% {
-        content: '...';
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -1009,18 +322,13 @@ body {
     font-weight: 900;
     text-align: center;
     margin-bottom: 16px;
-    background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #6366f1);
-    background-size: 400% 400%;
+    background: var(--accent-gradient);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.03em;
-    animation: 
-        gradientShift 8s ease infinite,
-        titleFloat 3s ease-in-out infinite,
-        neonGlow 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
-    transform-style: preserve-3d;
+    animation: titleShine 4s ease-in-out infinite, titleFloat 3s ease-in-out infinite;
 }
 
 .hero-subtitle {
@@ -1038,141 +346,6 @@ body {
     color: var(--text-tertiary);
     font-weight: 500;
     animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
-}
-
-/* ==================== BOTÓN DE ACTUALIZACIÓN ==================== */
-.update-button {
-    margin-top: 24px;
-    padding: 16px 40px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    border: 2px solid #10b981;
-    border-radius: var(--radius-lg);
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s backwards;
-}
-
-.update-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.6s;
-}
-
-.update-button::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-lg);
-    padding: 2px;
-    background: linear-gradient(45deg, #10b981, #34d399, #10b981);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.update-button:hover {
-    transform: translateY(-5px) scale(1.08);
-    box-shadow: 
-        var(--shadow-lg),
-        0 0 40px rgba(16, 185, 129, 0.5),
-        0 0 60px rgba(16, 185, 129, 0.3);
-    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-.update-button:hover::before {
-    left: 100%;
-}
-
-.update-button:hover::after {
-    opacity: 1;
-    animation: borderRotate 3s linear infinite;
-}
-
-.update-button:active {
-    transform: translateY(-3px) scale(1.05);
-}
-
-.update-button i {
-    font-size: 20px;
-    animation: floatSlow 3s ease-in-out infinite;
-}
-
-.update-button:hover i {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 
-            var(--shadow-lg),
-            0 0 40px rgba(16, 185, 129, 0.5);
-    }
-    50% {
-        box-shadow: 
-            var(--shadow-lg),
-            0 0 60px rgba(16, 185, 129, 0.7),
-            0 0 80px rgba(16, 185, 129, 0.4);
-    }
-}
-
-@keyframes borderRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes floatSlow {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Tooltip para el botón */
-.update-button-container {
-    position: relative;
-    display: inline-block;
-}
-
-.update-tooltip {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg-elevated);
-    padding: 8px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    border: 1px solid var(--border-medium);
-}
-
-.update-button:hover + .update-tooltip {
-    opacity: 1;
 }
 
 /* Server Stats Bar */
@@ -1540,23 +713,19 @@ body {
 }
 
 .player-card:hover {
-    transform: translateY(-12px) scale(1.03) rotateX(2deg);
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--border-medium);
-    box-shadow: 
-        var(--shadow-lg),
-        0 0 30px rgba(99, 102, 241, 0.3),
-        0 0 60px rgba(99, 102, 241, 0.1);
-    animation: pulse 2s ease-in-out infinite;
+    box-shadow: var(--shadow-lg);
+    animation: none;
 }
 
 .player-card:hover::before {
-    opacity: 0.08;
-    animation: shimmer 1.5s linear infinite;
+    opacity: 0.05;
+    animation: shimmer 2s linear infinite;
 }
 
 .player-card:hover::after {
     opacity: 1;
-    animation: spin 20s linear infinite;
 }
 
 .player-card:active {
@@ -1661,17 +830,14 @@ body {
 }
 
 .player-card:hover .player-avatar {
-    transform: scale(1.15) rotate(5deg) translateY(-3px);
-    box-shadow: 
-        0 12px 32px rgba(0, 0, 0, 0.7),
-        0 0 20px rgba(99, 102, 241, 0.5);
-    animation: floatSlow 3s ease-in-out infinite;
-    filter: brightness(1.1);
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    animation: bounce 0.6s ease-in-out;
 }
 
 .player-card:hover .player-avatar::after {
-    opacity: 0.5;
-    animation: spinSlow 8s linear infinite;
+    opacity: 0.3;
+    animation: rotate 3s linear infinite;
 }
 
 .player-info {
@@ -1805,18 +971,12 @@ body {
 
 .profile-modal.active {
     display: block;
-    animation: modalFadeIn 0.5s ease;
+    animation: modalFadeIn 0.4s ease;
 }
 
 @keyframes modalFadeIn {
-    from { 
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-    to { 
-        opacity: 1;
-        backdrop-filter: blur(16px);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .profile-content {
@@ -1826,24 +986,19 @@ body {
     border: 2px solid var(--border-medium);
     border-radius: var(--radius-2xl);
     padding: 48px;
-    box-shadow: 
-        var(--shadow-xl),
-        0 0 60px rgba(99, 102, 241, 0.2);
-    animation: modalZoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: var(--shadow-xl);
+    animation: modalSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
 }
 
 @keyframes modalSlideUp {
     from {
         opacity: 0;
-        transform: translateY(100px) scale(0.9) rotateX(10deg);
-    }
-    60% {
-        transform: translateY(-10px) scale(1.02) rotateX(-2deg);
+        transform: translateY(60px) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -1869,11 +1024,8 @@ body {
     background: var(--error);
     color: white;
     border-color: var(--error);
-    transform: rotate(180deg) scale(1.2);
-    box-shadow: 
-        0 8px 24px rgba(239, 68, 68, 0.5),
-        0 0 40px rgba(239, 68, 68, 0.3);
-    animation: pulse 1s ease-in-out infinite;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
 }
 
 .profile-hero {
@@ -2118,22 +1270,12 @@ body {
 .achievement-icon {
     font-size: 2.5rem;
     margin-bottom: 0.75rem;
-    animation: floatSlow 4s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.achievement-card:hover .achievement-icon {
-    animation: floatSlow 4s ease-in-out infinite, spin 2s ease-in-out 1;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
-    transform: scale(1.2);
+    animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(-5deg); }
-    50% { transform: translateY(-15px) rotate(0deg); }
-    75% { transform: translateY(-10px) rotate(5deg); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 .achievement-title {
@@ -2145,57 +1287,6 @@ body {
 .achievement-description {
     font-size: 0.85rem;
     color: var(--text-tertiary);
-}
-
-/* Game Advancement Cards */
-.game-advancement-card {
-    background: var(--bg-elevated);
-    border: 2px solid var(--border-medium);
-    border-radius: var(--radius-md);
-    padding: 1rem;
-    transition: var(--transition);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.game-advancement-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent-primary);
-    background: var(--bg-hover);
-}
-
-.game-advancement-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent-gradient);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.game-advancement-card:hover::after {
-    transform: scaleX(1);
-}
-
-.advancement-category-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-md);
-    transition: var(--transition);
-}
-
-.advancement-category-header:hover {
-    background: var(--bg-hover);
 }
 
 /* Category Sections */
@@ -2391,10 +1482,6 @@ body {
             <h1 class="hero-title">⛏️ Minecraft Stats EPIC</h1>
             <p class="hero-subtitle">🚀 Panel Ultra Premium de Estadísticas Avanzadas 🎮</p>
             <p class="hero-timestamp">Actualizado: {UPDATE_TIME}</p>
-            <a href="https://github.com/statsmc/mcstats/actions/workflows/update-stats.yml" target="_blank" class="update-button">
-                <i class="fas fa-sync-alt"></i>
-                <span>Actualizar Stats</span>
-            </a>
         </div>
     </div>
 
@@ -2669,67 +1756,6 @@ function openProfile(uuid, isBot) {
     document.body.style.overflow = 'hidden';
 }
 
-// Diccionario de logros de Minecraft con iconos y descripciones
-const MINECRAFT_ADVANCEMENTS = {
-    // Story (Historia)
-    'minecraft:story/root': { name: 'Minecraft', icon: '🎮', desc: 'El corazón y la historia del juego', category: 'story' },
-    'minecraft:story/mine_stone': { name: 'La Edad de Piedra', icon: '⛏️', desc: 'Mina piedra con tu pico nuevo', category: 'story' },
-    'minecraft:story/upgrade_tools': { name: 'Mejorando', icon: '🔧', desc: 'Construye un pico mejor', category: 'story' },
-    'minecraft:story/smelt_iron': { name: 'Adquirir Hardware', icon: '⚙️', desc: 'Funde un lingote de hierro', category: 'story' },
-    'minecraft:story/obtain_armor': { name: '¡Cúbrete!', icon: '🛡️', desc: 'Protégete con una pieza de armadura', category: 'story' },
-    'minecraft:story/mine_diamond': { name: '¡DIAMANTES!', icon: '💎', desc: 'Consigue diamantes', category: 'story' },
-    'minecraft:story/enter_the_nether': { name: 'Necesitamos Ir Más Profundo', icon: '🔥', desc: 'Construye y entra al Nether', category: 'story' },
-    'minecraft:story/shiny_gear': { name: 'Cúbrete de Diamantes', icon: '💎', desc: 'Armadura de diamante', category: 'story' },
-    'minecraft:story/enchant_item': { name: 'Encantador', icon: '✨', desc: 'Encanta un objeto', category: 'story' },
-    'minecraft:story/enter_the_end': { name: 'El Fin?', icon: '🌌', desc: 'Entra al portal del End', category: 'story' },
-    
-    // Nether
-    'minecraft:nether/root': { name: 'Nether', icon: '🔥', desc: 'Lleva el verano contigo', category: 'nether' },
-    'minecraft:nether/return_to_sender': { name: 'Devuélvele el Golpe', icon: '💥', desc: 'Destruye un ghast con su bola de fuego', category: 'nether' },
-    'minecraft:nether/obtain_blaze_rod': { name: 'A las Llamas', icon: '🔥', desc: 'Consigue una vara de blaze', category: 'nether' },
-    'minecraft:nether/get_wither_skull': { name: 'Calavera Siniestra', icon: '💀', desc: 'Obtén calavera de wither', category: 'nether' },
-    'minecraft:nether/summon_wither': { name: 'Retenedor', icon: '💀', desc: 'Invoca al wither', category: 'nether' },
-    'minecraft:nether/brew_potion': { name: 'Alquimista Local', icon: '🧪', desc: 'Prepara una poción', category: 'nether' },
-    'minecraft:nether/create_beacon': { name: 'Trae el Faro', icon: '🔆', desc: 'Construye un faro', category: 'nether' },
-    'minecraft:nether/all_potions': { name: 'Gran Alquimista', icon: '🧪', desc: 'Todos los efectos de poción', category: 'nether' },
-    'minecraft:nether/create_full_beacon': { name: 'Faromanía', icon: '🔆', desc: 'Activa faro al máximo', category: 'nether' },
-    
-    // The End
-    'minecraft:end/root': { name: 'El Fin', icon: '🌌', desc: 'O el principio?', category: 'end' },
-    'minecraft:end/kill_dragon': { name: 'Libera el Fin', icon: '🐉', desc: 'Derrota al dragón', category: 'end' },
-    'minecraft:end/dragon_egg': { name: 'Próxima Generación', icon: '🥚', desc: 'Sostén el huevo de dragón', category: 'end' },
-    'minecraft:end/elytra': { name: 'El Cielo es el Límite', icon: '🦅', desc: 'Encuentra élytras', category: 'end' },
-    
-    // Adventure
-    'minecraft:adventure/root': { name: 'Aventura', icon: '⚔️', desc: 'Aventura y combate', category: 'adventure' },
-    'minecraft:adventure/kill_a_mob': { name: 'Cazador de Monstruos', icon: '🗡️', desc: 'Mata una criatura hostil', category: 'adventure' },
-    'minecraft:adventure/trade': { name: 'Buen Trato', icon: '💼', desc: 'Intercambia con aldeano', category: 'adventure' },
-    'minecraft:adventure/sleep_in_bed': { name: 'Dulces Sueños', icon: '🛏️', desc: 'Duerme en una cama', category: 'adventure' },
-    'minecraft:adventure/hero_of_the_village': { name: 'Héroe de la Aldea', icon: '🏆', desc: 'Defiende una aldea', category: 'adventure' },
-    'minecraft:adventure/kill_all_mobs': { name: 'Cazador Completo', icon: '⚔️', desc: 'Mata cada mob hostil', category: 'adventure' },
-    'minecraft:adventure/totem_of_undying': { name: 'Post Mortem', icon: '🗿', desc: 'Usa tótem de inmortalidad', category: 'adventure' },
-    'minecraft:adventure/adventuring_time': { name: 'Hora de Aventuras', icon: '🗺️', desc: 'Descubre todos los biomas', category: 'adventure' },
-    'minecraft:adventure/sniper_duel': { name: 'Francotirador', icon: '🎯', desc: 'Mata esqueleto a 50m', category: 'adventure' },
-    
-    // Husbandry
-    'minecraft:husbandry/root': { name: 'Agricultura', icon: '🌾', desc: 'Mundo lleno de amigos', category: 'husbandry' },
-    'minecraft:husbandry/breed_an_animal': { name: 'Apareamiento', icon: '💕', desc: 'Cría dos animales', category: 'husbandry' },
-    'minecraft:husbandry/tame_an_animal': { name: 'Mejor Amigo', icon: '🐕', desc: 'Domestica un animal', category: 'husbandry' },
-    'minecraft:husbandry/fishy_business': { name: 'Negocio Sospechoso', icon: '🎣', desc: 'Atrapa un pez', category: 'husbandry' },
-    'minecraft:husbandry/plant_seed': { name: 'Sembremos', icon: '🌱', desc: 'Planta una semilla', category: 'husbandry' },
-    'minecraft:husbandry/breed_all_animals': { name: 'Apareamiento Completo', icon: '💑', desc: 'Cría todos los animales', category: 'husbandry' },
-    'minecraft:husbandry/balanced_diet': { name: 'Dieta Equilibrada', icon: '🍎', desc: 'Come todo', category: 'husbandry' },
-};
-
-// Categorías de logros
-const ADVANCEMENT_CATEGORIES = {
-    story: { name: 'Historia', icon: '📖', color: '#10b981' },
-    nether: { name: 'Nether', icon: '🔥', color: '#ef4444' },
-    end: { name: 'El Fin', icon: '🌌', color: '#8b5cf6' },
-    adventure: { name: 'Aventura', icon: '⚔️', color: '#3b82f6' },
-    husbandry: { name: 'Agricultura', icon: '🌾', color: '#f59e0b' }
-};
-
 function renderProfile(player) {
     // Calcular totales
     const totalDistance = DISTANCE_STATS.reduce((sum, key) => sum + parseInt(player.extras[key] || 0), 0);
@@ -2897,70 +1923,6 @@ function renderProfile(player) {
             </div>
         </div>
     ` : '';
-    
-    // Procesar logros del juego de Minecraft
-    const gameAdvancements = player.advancements || {};
-    const advancementsByCategory = { story: [], nether: [], end: [], adventure: [], husbandry: [] };
-    let totalAdvancements = 0;
-    
-    Object.keys(gameAdvancements).forEach(advKey => {
-        if (MINECRAFT_ADVANCEMENTS[advKey]) {
-            const adv = MINECRAFT_ADVANCEMENTS[advKey];
-            const advData = gameAdvancements[advKey];
-            const completedDate = advData.criteria ? Object.values(advData.criteria)[0] : null;
-            
-            advancementsByCategory[adv.category].push({
-                ...adv,
-                key: advKey,
-                completedDate: completedDate
-            });
-            totalAdvancements++;
-        }
-    });
-    
-    // HTML de logros del juego
-    let gameAdvancementsHtml = '';
-    if (totalAdvancements > 0) {
-        const categories = Object.entries(advancementsByCategory).filter(([_, advs]) => advs.length > 0);
-        
-        gameAdvancementsHtml = `
-            <div class="game-advancements-section" style="margin: 2rem 0;">
-                <div class="section-header">
-                    <div class="section-title">
-                        <i class="fas fa-medal"></i>
-                        <span>Logros de Minecraft (${totalAdvancements})</span>
-                    </div>
-                </div>
-                
-                ${categories.map(([catKey, advs]) => {
-                    const cat = ADVANCEMENT_CATEGORIES[catKey];
-                    return `
-                        <div class="advancement-category" style="margin-bottom: 2rem;">
-                            <div class="advancement-category-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md); border-left: 4px solid ${cat.color};">
-                                <span style="font-size: 1.5rem;">${cat.icon}</span>
-                                <h3 style="font-size: 1.2rem; font-weight: 700; color: ${cat.color};">${cat.name}</h3>
-                                <span style="margin-left: auto; background: var(--bg-elevated); padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 700; color: ${cat.color};">${advs.length}</span>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.75rem;">
-                                ${advs.map(adv => `
-                                    <div class="game-advancement-card" style="background: var(--bg-elevated); border: 2px solid var(--border-medium); border-radius: var(--radius-md); padding: 1rem; transition: var(--transition); cursor: pointer; position: relative; overflow: hidden;">
-                                        <div style="position: absolute; top: 0; right: 0; width: 3rem; height: 3rem; background: linear-gradient(135deg, transparent 50%, ${cat.color}40 50%);"></div>
-                                        <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                                            <span style="font-size: 2rem; flex-shrink: 0;">${adv.icon}</span>
-                                            <div style="flex: 1; min-width: 0;">
-                                                <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; font-size: 0.95rem;">${adv.name}</div>
-                                                <div style="font-size: 0.8rem; color: var(--text-tertiary); line-height: 1.4;">${adv.desc}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-        `;
-    }
 
     document.getElementById('profileData').innerHTML = `
         <div class="profile-hero">
@@ -3073,8 +2035,6 @@ function renderProfile(player) {
         </div>
         
         ${achievementsHtml}
-        
-        ${gameAdvancementsHtml}
         
         ${searchHtml}
         ${categoriesHtml}
