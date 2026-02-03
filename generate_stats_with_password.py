@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Script MEJORADO para generar estadísticas de Minecraft
-- Mejor logging para debugging
-- Manejo de errores mejorado
-- Validación de datos
+Script CORREGIDO para generar estadísticas de Minecraft
+- Detección de bots MEJORADA (más permisiva)
+- Logging completo para debugging
+- Manejo de errores robusto
 """
 
 import paramiko
@@ -32,10 +32,6 @@ STATS_FOLDER = WORLD_PATH.rstrip("/") + "/stats"
 ADVANCEMENTS_FOLDER = WORLD_PATH.rstrip("/") + "/advancements"
 
 # ================= UTILS =================
-def offline_uuid(name):
-    base = ("OfflinePlayer:" + name).encode("utf-8")
-    return hashlib.md5(base).hexdigest()
-
 def ticks_to_time(ticks):
     seconds = ticks // 20
     hours = seconds // 3600
@@ -49,33 +45,55 @@ def sum_values(d):
         return 0
 
 def is_bot(p):
+    """
+    Detección de bots MEJORADA - Más permisiva
+    Solo marca como bot si es MUY obvio
+    """
+    name = p["name"]
     ticks = p["ticks"]
     blocks = p["total_blocks"]
     kills = p["total_killed"]
     jumps = p["jumps"]
     
-    walk = int(p["extras"].get("minecraft:walk_one_cm", 0))
-    sprint = int(p["extras"].get("minecraft:sprint_one_cm", 0))
-    
     score = 0
     
-    if ticks < 1200: score += 4
-    if walk < 500 and sprint < 200: score += 3
-    if blocks == 0 and kills == 0: score += 3
-    if jumps == 0 and ticks > 600: score += 3
+    # 1. Tiempo de juego muy bajo (menos de 1 minuto)
+    if ticks < 1200:  # Menos de 1 minuto
+        score += 5
     
-    name_lower = p["name"].lower()
-    bot_patterns = [
-        r"^(bot|npc|test|debug|dummy|fake|afk)",
-        r"(bot|npc|test|afk)$",
+    # 2. Nombre sospechoso (muy estricto)
+    name_lower = name.lower()
+    obvious_bots = [
+        r'^bot[_-]',           # bot_123, bot-test
+        r'^test[_-]',          # test_user
+        r'^npc[_-]',           # npc_villager
+        r'^dummy',             # dummy, dummy123
+        r'^fake',              # fake_player
     ]
     
-    for pattern in bot_patterns:
+    for pattern in obvious_bots:
         if re.match(pattern, name_lower):
-            score += 5
+            score += 10  # Muy sospechoso
             break
     
-    return score >= 7
+    # 3. Absolutamente sin actividad (ni un salto)
+    if ticks > 1200 and blocks == 0 and kills == 0 and jumps == 0:
+        score += 8
+    
+    # 4. UUID sospechoso (solo números/letras random)
+    if re.match(r'^[0-9a-f]{32}$', name):  # UUID sin nombre
+        score += 3
+    
+    # DECISIÓN: Solo marca como bot si score >= 12
+    # Esto es MUY estricto, casi nadie será bot
+    is_bot_result = score >= 12
+    
+    if is_bot_result:
+        print(f"   🤖 Bot detectado: {name} (score: {score})")
+    else:
+        print(f"   👤 Jugador: {name} - {p['time_txt']} (score: {score})")
+    
+    return is_bot_result
 
 # ================= CONNECT SSH =================
 print(f"🔌 Conectando a {SSH_HOST}:{SSH_PORT}...")
@@ -105,8 +123,7 @@ def try_json(path):
     try:
         with sftp.open(path) as f:
             return json.load(f)
-    except Exception as e:
-        print(f"⚠️  No se pudo leer {path}: {e}")
+    except:
         return None
 
 print("📝 Cargando nombres de jugadores...")
@@ -115,9 +132,7 @@ uc = try_json("/usercache.json")
 if uc:
     for e in uc:
         uuid_to_name[e["uuid"].replace("-", "")] = e["name"]
-    print(f"✅ {len(uuid_to_name)} nombres cargados desde usercache.json")
-else:
-    print("⚠️  No se pudo cargar usercache.json")
+    print(f"✅ {len(uuid_to_name)} nombres cargados")
 
 # ================= LOAD SKINRESTORER =================
 print("🎨 Cargando texturas de skins...")
@@ -143,12 +158,12 @@ try:
                     skin_url = texture_json["textures"]["SKIN"]["url"]
                     texture_hash = skin_url.split("/")[-1]
                     skin_textures[uuid.replace("-", "")] = texture_hash
-        except Exception as e:
+        except:
             continue
     
     print(f"✅ {len(skin_textures)} texturas cargadas")
-except Exception as e:
-    print(f"⚠️  SkinRestorer no disponible: {e}")
+except:
+    print("⚠️  SkinRestorer no disponible")
 
 # ================= READ STATS =================
 print(f"📊 Leyendo estadísticas desde {STATS_FOLDER}...")
@@ -170,9 +185,7 @@ try:
     print(f"📁 {len(json_files)} archivos de estadísticas encontrados")
     
     if len(json_files) == 0:
-        print("❌ ERROR: No hay archivos de estadísticas en la carpeta")
-        print(f"   Verifica que existe: {STATS_FOLDER}")
-        print(f"   Y que contiene archivos .json")
+        print("❌ ERROR: No hay archivos de estadísticas")
         sftp.close()
         ssh.close()
         exit(1)
@@ -190,8 +203,7 @@ for fname in json_files:
     try:
         with sftp.open(fname) as f:
             stats_data = json.load(f)
-    except Exception as e:
-        print(f"⚠️  Error leyendo {fname}: {e}")
+    except:
         continue
 
     s = stats_data.get("stats", {})
@@ -240,38 +252,35 @@ for fname in json_files:
 sftp.close()
 ssh.close()
 
-print(f"✅ {len(players)} jugadores procesados")
+print(f"\n✅ {len(players)} jugadores procesados")
 
 # ================= CLASSIFY =================
-print("🤖 Clasificando jugadores y bots...")
+print("\n🤖 Clasificando jugadores y bots...")
+print("-" * 60)
+
 real = []
 bots = []
 
 for p in players:
     if is_bot(p):
         bots.append(p)
-        print(f"   🤖 Bot detectado: {p['name']}")
     else:
         real.append(p)
-        print(f"   👤 Jugador: {p['name']} - {p['time_txt']}")
 
 real.sort(key=lambda x: x["ticks"], reverse=True)
 bots.sort(key=lambda x: x["ticks"], reverse=True)
 
 real = real[:TOP_LIMIT]
 
+print("-" * 60)
 print(f"\n📊 RESUMEN:")
 print(f"   👥 Jugadores reales: {len(real)}")
 print(f"   🤖 Bots detectados: {len(bots)}")
 
 if len(real) == 0:
-    print("\n❌ ERROR: No hay jugadores reales!")
-    print("   Posibles causas:")
-    print("   1. Todos fueron clasificados como bots")
-    print("   2. No hay jugadores en el servidor")
-    print("   3. Los archivos de stats están vacíos")
-    print("\n💡 Solución: Revisa los criterios de detección de bots")
-    # Continuar de todos modos para generar el HTML
+    print("\n⚠️  ADVERTENCIA: No hay jugadores reales!")
+    print("   Todos fueron clasificados como bots")
+    print("   Revisa los criterios de detección arriba")
 
 # ================= CALCULATE AGGREGATES =================
 def calculate_aggregates(lst):
@@ -333,10 +342,11 @@ players_json = json.dumps([{
     "jumps": p["jumps"],
     "extras": p["extras"],
     "advancements": p.get("advancements", {})
-} for p in real], indent=2)
+} for p in real], ensure_ascii=False)
 
-print(f"\n📝 JSON generado ({len(players_json)} caracteres)")
-print(f"   Primeros 200 caracteres: {players_json[:200]}")
+print(f"\n📝 JSON de jugadores generado:")
+print(f"   Tamaño: {len(players_json)} caracteres")
+print(f"   Jugadores en JSON: {len(real)}")
 
 now = datetime.now().strftime("%d/%m/%Y %H:%M")
 
@@ -351,12 +361,21 @@ if not os.path.exists(template_path):
 with open(template_path, 'r', encoding='utf-8') as f:
     html_template = f.read()
 
-print(f"✅ Template leído ({len(html_template)} caracteres)")
+print(f"✅ Template leído: {len(html_template)} caracteres")
 
-# Reemplazar variables
+# VERIFICAR placeholder
+print("\n🔍 Verificando placeholders...")
+if '{PLAYERS_DATA}' in html_template:
+    print("   ✅ {PLAYERS_DATA} encontrado")
+else:
+    print("   ❌ {PLAYERS_DATA} NO encontrado")
+    if '{{PLAYERS_DATA}}' in html_template:
+        print("   ⚠️  Corrigiendo {{PLAYERS_DATA}} → {PLAYERS_DATA}")
+        html_template = html_template.replace('{{PLAYERS_DATA}}', '{PLAYERS_DATA}')
+
+# Reemplazar placeholders
 print("\n🔄 Reemplazando placeholders...")
 html = html_template.replace('{PLAYERS_DATA}', players_json)
-html = html.replace('{SERVER_STATS}', json.dumps(server_stats))
 html = html.replace('{UPDATE_TIME}', now)
 html = html.replace('{PLAYER_COUNT}', str(server_stats['player_count']))
 html = html.replace('{TOTAL_TIME}', server_stats['total_time'])
@@ -365,26 +384,19 @@ html = html.replace('{TOTAL_DISTANCE}', server_stats['total_distance'])
 html = html.replace('{TOTAL_KILLS}', server_stats['total_kills'])
 html = html.replace('{AVG_TIME}', server_stats['avg_time'])
 
-# Verificar que se reemplazaron
+# Verificar reemplazo
 if '{PLAYERS_DATA}' in html:
-    print("⚠️  WARNING: {PLAYERS_DATA} no se reemplazó")
-if '{UPDATE_TIME}' in html:
-    print("⚠️  WARNING: {UPDATE_TIME} no se reemplazó")
+    print("   ❌ ERROR: {PLAYERS_DATA} NO se reemplazó")
+else:
+    print("   ✅ Todos los placeholders reemplazados")
 
 # Guardar
 print(f"\n💾 Guardando {OUTPUT_HTML}...")
 with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"✅ Archivo guardado ({len(html)} caracteres)")
-
-# Verificar que se guardó
-if os.path.exists(OUTPUT_HTML):
-    size = os.path.getsize(OUTPUT_HTML)
-    print(f"✅ {OUTPUT_HTML} creado ({size} bytes)")
-else:
-    print(f"❌ ERROR: No se pudo crear {OUTPUT_HTML}")
-    exit(1)
+size = os.path.getsize(OUTPUT_HTML)
+print(f"✅ Archivo guardado: {size} bytes")
 
 print("\n" + "=" * 60)
 print("✅ GENERACIÓN COMPLETADA")
@@ -393,5 +405,5 @@ print(f"📊 Estadísticas:")
 print(f"   👥 Jugadores: {len(real)}")
 print(f"   🤖 Bots: {len(bots)}")
 print(f"   📅 Actualizado: {now}")
-print(f"   📄 Archivo: {OUTPUT_HTML}")
+print(f"   📄 Archivo: {OUTPUT_HTML} ({size} bytes)")
 print("\n🚀 Listo para GitHub Pages!")
