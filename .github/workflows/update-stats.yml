@@ -2,8 +2,14 @@ name: Update Minecraft Stats
 
 on:
   workflow_dispatch:
+  
+  # ⭐ NUEVO: Permite actualizar desde el botón web
+  repository_dispatch:
+    types: [update-stats]
+  
   schedule:
     - cron: '0 */6 * * *'
+  
   push:
     branches: [ main ]
     paths:
